@@ -60,10 +60,18 @@ def telemetry(sid, data):
         # The current image from the center camera of the car
         imgString = data["image"]
         image = Image.open(BytesIO(base64.b64decode(imgString)))
+        
+        # Preprocess for nVidia pipeline
+        FROM_TOP = 60
+        FROM_BOTTOM = 20
+        image = image.crop((0, FROM_TOP, 320, 160 - FROM_BOTTOM))
+        image = image.resize((200, 66))
+        
         image_array = np.asarray(image)
         steering_angle = float(model.predict(image_array[None, :, :, :], batch_size=1))
 
         throttle = controller.update(float(speed))
+        #throttle = (17.0 - speed) * 0.5
 
         print(steering_angle, throttle)
         send_control(steering_angle, throttle)
