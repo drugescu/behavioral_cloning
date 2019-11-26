@@ -267,7 +267,7 @@ def generate_nvidia():
     print("Generated model.")
 
     model.compile(loss = 'mse', optimizer = 'adam', metrics = ['accuracy'])
-    print("Compiled model - nVidia, ADAM, MSE, nomalized, metrics = accuracy, dropouts = 0.5, (5 conv, 3 fc).")
+    print("Compiled model - nVidia, ADAM, MSE, nomalized, metrics = accuracy, dropouts = 0.3, (5 conv, 3 fc).")
     
     return model
 
@@ -280,7 +280,7 @@ model.fit_generator(train_generator,
             steps_per_epoch  = math.ceil(len(train_samples) / batch_size), 
             validation_data  = validation_generator, 
             validation_steps = math.ceil(len(validation_samples) / batch_size), 
-            epochs = 4, verbose = 1)
+            epochs = 10, verbose = 1)
 print("Fit model to data using generator.")
 
 model.save('model.h5')
