@@ -60,6 +60,7 @@ def telemetry(sid, data):
         # The current image from the center camera of the car
         imgString = data["image"]
         image = Image.open(BytesIO(base64.b64decode(imgString)))
+        image_orig = image
         
         # Preprocess for nVidia pipeline
         FROM_TOP = 60
@@ -71,7 +72,7 @@ def telemetry(sid, data):
         steering_angle = float(model.predict(image_array[None, :, :, :], batch_size=1))
 
         throttle = controller.update(float(speed))
-        #throttle = (17.0 - speed) * 0.5
+        #throttle = (17.0 - float(speed)) * 0.5
 
         print(steering_angle, throttle)
         send_control(steering_angle, throttle)
@@ -80,7 +81,7 @@ def telemetry(sid, data):
         if args.image_folder != '':
             timestamp = datetime.utcnow().strftime('%Y_%m_%d_%H_%M_%S_%f')[:-3]
             image_filename = os.path.join(args.image_folder, timestamp)
-            image.save('{}.jpg'.format(image_filename))
+            image_orig.save('{}.jpg'.format(image_filename))
     else:
         # NOTE: DON'T EDIT THIS.
         sio.emit('manual', data={}, skip_sid=True)
