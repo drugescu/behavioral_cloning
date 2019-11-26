@@ -118,7 +118,7 @@ I have only captured one lap of driving behaviour on the second track, trying to
 
 ![alt text][image5]
 
-To capture good driving behavior, I first recorded a whole lap driving as close to the cnter as possible, then trained the model and inspected which places caused failure, then re-recvorded those. In particular, for the second track, the initial portion of two parallel directions of the track was problematic and the CNN veered left. Several oter tight turns proved problematic and the car jumped off the cliff as can be seen in the ```run2.mp4``` recording. I've re-recorded runs on some of these portions and the mode works ok-ish now on the second track, needing 3-4 interventions to stay on track.
+To capture good driving behavior, I first recorded a whole lap driving as close to the center as possible, then trained the model and inspected which places caused failure, then re-recorded those. In particular, for the second track, the initial portion of two parallel directions of the track was problematic and the CNN veered left. Several other tight turns proved problematic and the car jumped off the cliff as can be seen in the ```run2.mp4``` recording. I've re-recorded runs on some of these portions and the mode works ok-ish now on the second track, needing 3-4 interventions to stay on track.
 
 To augment the data sat, I also flipped images and angles and used centr, left and right images.
 
